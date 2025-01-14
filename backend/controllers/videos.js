@@ -52,4 +52,33 @@ export class VideosController {
             res.status(500).json({ message: error.message });
         }
     }
+
+    static async getVideosByTema(req, res) {
+        try {
+            const videos = await VideoModel.getVideosByTema(req.params.tema);
+            if (videos.length === 0) {
+                return res.status(404).json({ message: "No hay videos con ese tema" });
+            }
+            res.json(videos);
+        } catch (error) {
+            console.error("Error en el servidor", error);
+            res.status(500).json({ message: error.message });
+        }
+    }
+
+    static async getVideosRandom(req, res) {
+        try {
+            const video = await VideoModel.getVideosRandom();
+            console.log("Video retornado por el modelo:", video);
+
+            if (!video || video.length === 0) {
+                return res.status(404).json({ message: "No hay videos" });
+            }
+
+            return res.json(video[0]);
+        } catch (error) {
+            console.error("Error en el servidor", error);
+            return res.status(500).json({ message: error.message });
+        }
+    }
 }

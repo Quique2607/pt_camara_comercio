@@ -16,3 +16,9 @@ videoRoutes.patch("/:id", VideosController.updateVideo);
 
 //eliminar videos
 videoRoutes.delete("/:id", VideosController.deleteVideo);
+
+//mostrar videos por tema
+videoRoutes.get("/tema/:tema", VideosController.getVideosByTema);
+
+//mostrar videos randoms
+videoRoutes.get("/random/aleatorio", VideosController.getVideosRandom);

@@ -60,5 +60,36 @@ export class VideoModel{
         }
     }
 
+    static async getVideosByTema(tema){
+        try {
+            const [rows] = await con.query("SELECT * FROM video WHERE tema = ?", tema);
+            return rows;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    static async getVideosRandom() {
+        try {
+            const [ids] = await con.query("SELECT id FROM video");
+            console.log("IDs obtenidos:", ids);
+
+            if (ids.length === 0) {
+                return [];
+            }
+
+            const randomIndex = Math.floor(Math.random() * ids.length);
+            const randomId = ids[randomIndex].id;
+            console.log("ID aleatorio seleccionado:", randomId);
+
+            const [video] = await con.query("SELECT * FROM video WHERE id = ?", [randomId]);
+            console.log("Video encontrado:", video);
+
+            return video;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     
 }
