@@ -1,10 +1,3 @@
-/*
--- Query: SELECT * FROM video
-LIMIT 0, 1000
-
--- Date: 2025-01-14 17:36
-*/
-
 create database videos;
 
 use  videos;
@@ -16,12 +9,17 @@ CREATE TABLE video(
     url varchar(500) not null
 );
 
-INSERT INTO `` (`id`,`nombre`,`tema`,`url`) VALUES ('EYQTTDSAOG','aprende a invertir','educacion financiera','https://hp.camaracomercioexterior.org:5443/Ciclero/streams/485649599248543263375556.mp4');
-INSERT INTO `` (`id`,`nombre`,`tema`,`url`) VALUES ('gfredswert','video acerca de la educacion','educacion comercial','https://hp.camaracomercioexterior.org:5443/Ciclero/streams/089340770071707042008728.mp4');
-INSERT INTO `` (`id`,`nombre`,`tema`,`url`) VALUES ('IJPLZBXC','Introduccion a la educacion','educacion financiera','https://hp.camaracomercioexterior.org:5443/Ciclero/streams/170171732776129064751158.mp4');
-INSERT INTO `` (`id`,`nombre`,`tema`,`url`) VALUES ('OPXWBMVI','excel avanzado','excel','https://hp.camaracomercioexterior.org:5443/Ciclero/streams/485649599248543263375556.mp4');
-INSERT INTO `` (`id`,`nombre`,`tema`,`url`) VALUES ('PWSGXWPMSY','que se encesita para el comercio','educacion comercial','https://hp.camaracomercioexterior.org:5443/Ciclero/streams/485649599248543263375556.mp4');
-INSERT INTO `` (`id`,`nombre`,`tema`,`url`) VALUES ('RFYQGKVOCO','empieza con un negocio','educacion financiera','https://hp.camaracomercioexterior.org:5443/Ciclero/streams/485649599248543263375556.mp4');
-INSERT INTO `` (`id`,`nombre`,`tema`,`url`) VALUES ('RIWENSMXTR','excel basico','excel','https://hp.camaracomercioexterior.org:5443/Ciclero/streams/485649599248543263375556.mp4');
-INSERT INTO `` (`id`,`nombre`,`tema`,`url`) VALUES ('TABSSTVIVX','excel intermedio','excel','https://hp.camaracomercioexterior.org:5443/Ciclero/streams/485649599248543263375556.mp4');
-INSERT INTO `` (`id`,`nombre`,`tema`,`url`) VALUES ('WOEDKHWGGS','por donde empezar a comerciar','educacion comercial','https://hp.camaracomercioexterior.org:5443/Ciclero/streams/485649599248543263375556.mp4');
+CREATE TABLE navegacion(
+	id varchar(5) NOT NULL Primary Key,
+    url varchar(500) NOT NULL,
+    agente varchar(255) NOT NULL,
+    hora_web TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    hora_video TIMESTAMP
+);
+
+insert into video(id,nombre,tema,url) values ("gfredswert","prueba","educacion","dsdsd");
+
+INSERT INTO navegacion(id,url,agente,hora_web,hora_video) values ("SDFFD", "fdfdfdfd", "google", "2025-01-14T10:00:00Z", null);
+
+SELECT * FROM video;
+select * from navegacion;

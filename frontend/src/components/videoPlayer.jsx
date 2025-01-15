@@ -1,8 +1,11 @@
+import { use } from "react";
 import { useEffect, useState } from "react";
+import { registerAccess } from "../utils/utils.js";
 
 const VideoPlayer = () => {
   const [video, setVideo] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [playVideo, setPlayVideo] = useState(new Set());
 
   const fetchVideo = async () => {
     setIsLoading(true);
@@ -16,9 +19,25 @@ const VideoPlayer = () => {
     }, 1000);
   };
 
+  const handlePlay = () => {
+    if(!playVideo.has(video.id)){
+
+    const hora_video = new Date();
+    const hora_video_datetime = hora_video.toISOString().slice(0, 19).replace('T', ' ');
+    registerAccess(video.url, null, hora_video_datetime);
+    setPlayVideo((prev)=>new Set(prev).add(video.id));
+    }
+  };
+
   useEffect(() => {
     fetchVideo();
   }, []);
+
+  useEffect(() => {
+    const hora_web = new Date();
+    const hora_web_datetime = hora_web.toISOString().slice(0, 19).replace('T', ' ');
+    registerAccess(window.location.pathname, hora_web_datetime );
+  },[])
   return (
     <>
       <div className="w-[80%] bg-white p-5 rounded-3xl flex flex-col justify-between items-center gap-3 mx-auto">
@@ -32,6 +51,7 @@ const VideoPlayer = () => {
               <video
                 className="w-full h-[400px] object-contain rounded-2xl"
                 controls
+                onPlay={handlePlay}
                 key={video.id}
               >
                 <source src={video.url} />
